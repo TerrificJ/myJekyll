@@ -356,5 +356,44 @@
     </svg><br>
 
     <h2>----stroke----</h2>
+    <svg height="80" width="250">
+        <g fill="none">
+            <path stroke="red" d="M 5 20 l 215 0"/>
+            <path stroke="black" d="M 5 40 l 215 0"/>
+            <path stroke="blue" d="M 5 60 l 215 0"/>
+        </g>
+    </svg>
+    <svg height="80" width="250">
+        <g fill="none" stroke="black">
+            <path stroke-width="2" d="M 5 20 l 215 0"/>
+            <path stroke-width="4" d="M 5 40 l 215 0"/>
+            <path stroke-width="6" d="M 5 60 l 215 0"/>
+        </g>
+    </svg>
+    <svg height="80" width="250">
+        <g fill="none" stroke="black" stroke-width="6">
+            <path stroke-linecap="butt" d="M 5 20 l 215 0"/>
+            <path stroke-linecap="round" d="M 5 40 l 215 0"/>
+            <path stroke-linecap="square" d="M 5 60 l 215 0"/>
+        </g>
+    </svg>
+    <svg height="80" width="250">
+        <g fill="none" stroke="black" stroke-width="4">
+            <path stroke-dasharray="5 5" d="M 5 20 l 215 0"/>
+            <path stroke-dasharray="10 10" d="M 5 40 l 215 0"/>
+            <path stroke-dasharray="20 10 5 5 5 10" d="M 5 60 l 215 0"/>
+        </g>
+    </svg><br>
+
+    <h2>----Filter----</h2>
+    <svg height="250" width="250">
+        <defs>
+            <filter id="f21" x="-0.1" y="-0.1">
+                <feGaussianBlur in="SourceGraphic" stDeviation="15" />
+            </filter>
+        </defs>
+        <rect x="5" y="5" stroke="green" fill="yellow" filter="f21">
+    </svg>
+
 </body>
 </html>
