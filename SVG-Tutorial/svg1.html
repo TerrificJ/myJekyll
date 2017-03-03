@@ -69,16 +69,16 @@
     	<path d="M150 0 L75 200 L225 200 Z"/>
     </svg>
     <svg height="400" width="450">
-    	<path id="lineAB" d="M 100 350 l 150 -300" stroke="red" stroke-width="3" fill="none"/>
-    	<path id="lineBC" d="M 250 50 l 150 300" stroke="red" stroke-width="3" fill="none"/>
-    	<path d="M 175 200 l 150 0" stroke="green" stroke-width="3" fill="none"/>
-    	<path d="M 100 350 q 150 -300 300 0" stroke="blue" stroke-width="5" fill="none"/>
-    	<g stroke="block" stroke-width="3" fill="black">
+    	<path id="lineAB" d="M 100 350 l 150 -300" style="stroke: red;stroke-width:3; fill: none"/>
+    	<path id="lineBC" d="M 250 50 l 150 300" style="stroke: red;stroke-width: 3; fill: none"/>
+    	<path d="M 175 200 l 150 0" style="stroke: green;stroke-width: 3; fill: none"/>
+    	<path d="M 100 350 q 150 -300 300 0" style="stroke: blue;stroke-width: 5; fill: none"/>
+    	<g style="stroke: black;stroke-width: 3; fill: black">
     		<circle id="pointA" cx="100" cy="350" r="3" />
     		<circle id="pointB" cx="250" cy="50" r="3" />
     		<circle id="pointC" cx="400" cy="350" r="3" />
     	</g>
-    	<g font-size="30" font-family="sans-serif" fill="black" stroke="none" text-anchor="middle">
+    	<g style="font-family: sans-serif;fill: black;stroke: none;text-anchor: middle;">
     		<text x="100" y="350" dx="-30">A</text>
     		<text x="250" y="50" dy="-10">B</text>
     		<text x="400" y="350" dx="30">C</text>
@@ -567,11 +567,55 @@
     <h2>----Moving text----</h2>
     <svg width="300" height="250">
         <g transform="translate(20,20)">
-            <text id="TextElement" x="0" y="0" font-family="Verdana" font-size="24">It's SVG!
+            <text id="TextElement1" x="0" y="0" font-family="Verdana" font-size="24">It's SVG!
                 <animateMotion path="M 0 0 L 100 100" dur="5s" fill="freeze"/>
             </text>
         </g>
-    </svg>
+    </svg><br>
 
+    <h2>----Move Rotate Scale----</h2>
+    <svg width="500" height="500">
+        <g transform="translate(20, 20)">
+            <text id="TextElement2" x="0" y="100" style="font-family:Verdana;font-size: 24;visibility:hidden;" transform="rotate(-45 20,20)">It's SVG
+                <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5" fill="freeze"/>
+                <animateMotion path="M 0 0 l 100 100" dur="5s" fill="freeze"/>
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" to="0 20,20" dur="5s" fill="freeze"/>
+                <animateTransform attributeName="transform" attributeType="XML" type="scale" additive="sum" from="1" to="3" begin="1s" dur="4s" fill="freeze"/>
+            </text>
+        </g>
+    </svg><br>
+
+    <h2>----Move Rotate Scale + growing rect with colour changed----</h2>
+    <svg width="600" height="300">
+        <rect x="300" y="100" width="300" height="200" fill="lime">
+            <animate attributeType="XML" attributeName="x" from="300" to="0" dur="5s" fill="freeze"/>
+            <animate attributeType="XML" attributeName="y" from="200" to="0" dur="5s" fill="freeze"/>
+            <animate attributeType="XML" attributeName="width" from="300" to="600" dur="5s" fill="freeze"/>
+            <animate attributeType="XML" attributeName="height" from="100" to="300" dur="5s" fill="freeze"/>
+            <animate attributeType="CSS" attributeName="fill" from="lime" to="red" begin="2s" dur="3s" fill="freeze"/>
+        </rect>
+        <text id="TextElement2" x="60" y="60" style="font-family:Verdana;font-size: 24;visibility:hidden;" transform="rotate(-45 20,20)">It's SVG
+            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="4" fill="freeze"/>
+            <animateMotion path="M 0 0 l 100 100" dur="5s" fill="freeze"/>
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" to="0 20,20" dur="5s" fill="freeze"/>
+            <animateTransform attributeName="transform" attributeType="XML" type="scale" additive="sum" from="1" to="3" begin="1s" dur="4s" fill="freeze"/>
+            <animate attributeType="CSS" attributeName="fill" from="red" to="blue" begin="1s" dur="4s" fill="freeze"/>
+        </text>
+    </svg><br>
+
+    <h2>----Rotating ellipses----</h2>
+    <svg width="1000" height="800">
+        <g id="R1" transform="translate(300,350)">
+            <ellipse rx="100" ry="0" fill="red" opacity="0.3">
+                <animateTransform attributeName="transform" type="rotate" dur="8s" from="0" to="360" repeatCount="indefinite"/>
+                <animate attributeType="XML" attributeName="cx" dur="8s" values="-20; 220; -20" repeatCount="indefinite"/>
+                <animate attributeType="XML" attributeName="ry" dur="8s" values="10; 60; 10" repeatCount="indefinite"/>
+            </ellipse>
+        </g>
+        <use xlink:href="#R1" transform="rotate(72 390 380)"/>
+        <use xlink:href="#R1" transform="rotate(144 390 380)"/>
+        <use xlink:href="#R1" transform="rotate(216 390 380)"/>
+        <use xlink:href="#R1" transform="rotate(288 390 380)"/>
+    </svg>
 </body>
 </html>
