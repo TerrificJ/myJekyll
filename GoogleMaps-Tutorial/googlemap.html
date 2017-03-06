@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GoogleMap Tutorial</title>
+	<style type="text/css">
+		.flex-container{
+			display: flex;
+			width: 100%;
+		    justify-content: flex-start;
+			flex-wrap: wrap;
+		}
+		.flex-item{
+			margin: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>My First Google Map</h1>
+	<div id="googleMap1" style="width:100%; height:400px;"></div><br>
+	<div class = "flex-container">
+		<div class = "flex-item" id="googleMap2" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap3" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap4" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap5" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap6" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap7" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap8" style="width:400px; height:300px;"></div>
+	</div>
+	<script type="text/javascript">
+		function myMap(){
+			var qpsIt = { "lat": -34.421181, "long": 150.893081 };
+			var sydney = { "lat": -33.8688, "long": 151.2093 };
+			var kiama = { "lat": -34.6738, "long": 150.8444 };
+			var mossVale = { "lat": -34.5506, "long": 150.3964 }
+
+			var myCenter = new google.maps.LatLng(qpsIt.lat, qpsIt.long);
+			var myStart = new google.maps.LatLng(mossVale.lat, mossVale.long);
+			var myEnd = new google.maps.LatLng(kiama.lat, kiama.long);
+			
+			var mapCanvas1 = document.getElementById("googleMap1");
+			var mapCanvas2 = document.getElementById("googleMap2");
+			var mapCanvas3 = document.getElementById("googleMap3");
+			var mapCanvas4 = document.getElementById("googleMap4");
+			var mapCanvas5 = document.getElementById("googleMap5");
+			var mapCanvas6 = document.getElementById("googleMap6");
+			var mapCanvas7 = document.getElementById("googleMap7");
+			var mapCanvas8 = document.getElementById("googleMap8");
+			
+			var mapOption1 = {
+				center: myCenter, 
+				zoom: 5
+			};
+			var mapOption2 = {
+				center:myCenter,
+				zoom: 9,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var mapOption3 = {
+				center:myCenter,
+				zoom: 9,
+				mapTypeId: google.maps.MapTypeId.SATELLITE
+			};
+			var mapOption4 = {
+				center:myCenter,
+				zoom: 9,
+				mapTypeId: google.maps.MapTypeId.HYBRID
+			};
+			var mapOption5 = {
+				center:myCenter,
+				zoom: 9,
+				mapTypeId: google.maps.MapTypeId.TERRAIN
+			};
+			var mapOption6 = {
+				center:myCenter,
+				zoom: 7,
+				disableDefaultUI:true,
+			};
+			var mapOption7 = {
+				center:myCenter,
+				zoom: 7,
+				panControl: true,
+				zoomControl: true,
+				mapTypeControl: true,
+				scaleControl: true,
+				streetViewControl: true,
+				overviewMapControl: true,
+				rotateControl: true,			
+			};
+			var mapOption8 = {
+				center:myCenter,
+				zoom: 7,
+				zoomControl: true,
+				zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL }
+			};
+
+			var map1 = new google.maps.Map(mapCanvas1, mapOption1);
+			var map2 = new google.maps.Map(mapCanvas2, mapOption2);
+			var map3 = new google.maps.Map(mapCanvas3, mapOption3);
+			var map4 = new google.maps.Map(mapCanvas4, mapOption4);
+			var map5 = new google.maps.Map(mapCanvas5, mapOption5);
+	 		var map6 = new google.maps.Map(mapCanvas6, mapOption6);
+	 		var map7 = new google.maps.Map(mapCanvas7, mapOption7);
+	 		var map8 = new google.maps.Map(mapCanvas8, mapOption8);
+
+			var marker1 = new google.maps.Marker({position: myCenter});
+			var marker2 = new google.maps.Marker({
+				position: myCenter,
+				animation: google.maps.Animation.BOUNCE,
+			});
+			var marker3 = new google.maps.Marker({
+				position: myCenter,
+				icon:'Poke-Ball.png',
+			})
+
+			var flightPath = new google.maps.Polyline({
+				path: [ myStart, myCenter, myEnd ],
+				strokeColor: "#0000FF",
+				strokeOpacity: 0.8,
+				StrokeWeight:2,
+			});
+
+			var myPolygon = new google.maps.Polygon({
+				path: [ myStart, myCenter, myEnd ],
+				strokeColor: "#0000FF",
+				strokeOpacity: 0.8,
+				StrokeWeight: 2, 
+				fillColor: "#0000FF",
+				fillOpacity: 0.4,
+			});
+
+			var myCircle = new google.maps.Circle({
+				center: myCenter,
+				radius: 200000,
+				strokeColor: "#0000FF",
+				strokeOpacity: 0.8,
+				StrokeWeight: 2,
+				fillColor: "#0000FF",
+				fillOpacity: 0.4,
+			});
+
+			var infoWindow = new google.maps.InfoWindow({
+				content:"This is QPS IT!!"
+			});
+
+			marker1.setMap(map1);
+			google.maps.event.addListener(marker1, 'click', function(){
+				var pos = map1.getZoom();
+				map1.setZoom(9);
+				map1.setCenter(marker1.getPosition());
+				window.setTimeout(function(){ map1.setZoom(pos);}, 3000);
+				var infoWindow = new google.maps.InfoWindow({
+				content:"This is QPS IT!!"
+				});
+				infoWindow.open(map1, marker1);
+			});
+
+			marker2.setMap(map2);
+			marker3.setMap(map3);
+			flightPath.setMap(map4);
+			myPolygon.setMap(map5);
+			myCircle.setMap(map1);
+
+			google.maps.event.addListener(map4, 'click', function(event){
+				placeMarker(map4, event.latLng);
+			});
+
+			function placeMarker(map, location){
+				var marker = new google.maps.Marker({
+					position: location,
+					map:map,
+				});
+				var infoWindow = new google.maps.InfoWindow({
+					content: 'Latitude' + location.lat() + '<br>Longitude:' + location.lng()
+				});
+				infoWindow.open(map, marker);
+			}
+
+			
+	/*		var mapProp={
+				center:new google.maps.LatLng(-34.421181, 150.893081),
+				zoom:5,
+			};
+			var mapOption2={
+				center:new google.maps.LatLng(-34.421181, 150.893081),
+				zoom:9,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+			};
+			var mapOption3={
+				center:new google.maps.LatLng(-34.421181, 150.893081),
+				zoom:9,
+				mapTypeId: google.maps.MapTypeId.SATELLITE,
+			};
+			var mapOption4={
+				center:new google.maps.LatLng(-34.421181, 150.893081),
+				zoom:9,
+				mapTypeId: google.maps.MapTypeId.HYBRID,
+			};
+			var mapOption5={
+				center:new google.maps.LatLng(-34.421181, 150.893081),
+				zoom:9,
+				mapTypeId: google.maps.MapTypeId.TERRAIN,
+			};
+*/
+			//var map1 = new google.maps.Map(document.getElementById("googleMap1"),mapProp);
+/*			var map1 = new google.maps.Map(document.getElementById("googleMap1"),mapOption1);
+			var myCenter = new google.maps.LatLng(-34.421181, 150.893081);
+			var marker = new google.maps.Marker({position: myCenter});
+			marker.setMap(map1);
+			var map2 = new google.maps.Map(document.getElementById("googleMap2"),mapOption2);
+			var map3 = new google.maps.Map(document.getElementById("googleMap3"),mapOption3);
+			var map4 = new google.maps.Map(document.getElementById("googleMap4"),mapOption4);
+			var map5 = new google.maps.Map(document.getElementById("googleMap5"),mapOption5);
+			*/
+		}
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiWAouqPFE53FmwZ74mr_aBd60ZSISUyM&callback=myMap"></script>
+</body>
+</html>
