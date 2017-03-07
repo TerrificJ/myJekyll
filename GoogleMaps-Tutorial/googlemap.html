@@ -26,6 +26,7 @@
 		<div class = "flex-item" id="googleMap6" style="width:400px; height:300px;"></div>
 		<div class = "flex-item" id="googleMap7" style="width:400px; height:300px;"></div>
 		<div class = "flex-item" id="googleMap8" style="width:400px; height:300px;"></div>
+		<div class = "flex-item" id="googleMap9" style="width:400px; height:300px;"></div>
 	</div>
 	<script type="text/javascript">
 		function myMap(){
@@ -46,6 +47,7 @@
 			var mapCanvas6 = document.getElementById("googleMap6");
 			var mapCanvas7 = document.getElementById("googleMap7");
 			var mapCanvas8 = document.getElementById("googleMap8");
+			var mapCanvas9 = document.getElementById("googleMap9");
 			
 			var mapOption1 = {
 				center: myCenter, 
@@ -93,6 +95,11 @@
 				zoomControl: true,
 				zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL }
 			};
+			var mapOption9 = {
+				center:myCenter,
+				zoom: 18,
+				mapTypeId: google.maps.MapTypeId.HYBRID,
+			};
 
 			var map1 = new google.maps.Map(mapCanvas1, mapOption1);
 			var map2 = new google.maps.Map(mapCanvas2, mapOption2);
@@ -102,6 +109,8 @@
 	 		var map6 = new google.maps.Map(mapCanvas6, mapOption6);
 	 		var map7 = new google.maps.Map(mapCanvas7, mapOption7);
 	 		var map8 = new google.maps.Map(mapCanvas8, mapOption8);
+	 		var map9 = new google.maps.Map(mapCanvas9, mapOption9);
+	 		//map9.setTilt(0);
 
 			var marker1 = new google.maps.Marker({position: myCenter});
 			var marker2 = new google.maps.Marker({
