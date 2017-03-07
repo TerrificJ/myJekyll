@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Responsive Web Design</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+		.header{
+			padding: 15px;
+		}
+		.row::after {
+		    content: "";
+		    clear: both;
+		    display: table;
+		}
+		[class*="col-"]{
+			float: left;
+			padding: 15px;
+			width: 100%;
+		}		
+		@media only screen and (min-width: 600px){
+			.col-m-1 {width: 8.33%;}
+			.col-m-2 {width: 16.66%;}
+			.col-m-3 {width: 25%;}
+			.col-m-4 {width: 33.33%;}
+			.col-m-5 {width: 41.66%;}
+			.col-m-6 {width: 50%;}
+			.col-m-7 {width: 58.33%;}
+			.col-m-8 {width: 66.66%;}
+			.col-m-9 {width: 75%;}
+			.col-m-10 {width: 83.33%;}
+			.col-m-11 {width: 91.66%;}
+			.col-m-12 {width: 100%;}
+		}
+		@media only screen and (min-width: 769px){
+			.col-1 {width: 8.33%;}
+			.col-2 {width: 16.66%;}
+			.col-3 {width: 25%;}
+			.col-4 {width: 33.33%;}
+			.col-5 {width: 41.66%;}
+			.col-6 {width: 50%;}
+			.col-7 {width: 58.33%;}
+			.col-8 {width: 66.66%;}
+			.col-9 {width: 75%;}
+			.col-10 {width: 83.33%;}
+			.col-11 {width: 91.66%;}
+			.col-12 {width: 100%;}	
+		}
+		body {
+			background-color: lightgreen;
+		}
+		@media only screen and (orientation:landscape){
+			body{
+				background-color: pink;
+			}
+		}
+		.image{
+			max-width: 100%;
+			height: auto;
+		}
+		.background-img{
+			background-image: url('background-s.png');
+			background-size: contain;
+			color: #ffffff;
+		}
+		@media only screen and (min-width: 769px){
+			.background-img{
+				background-image: url('background.jpg');
+			}
+		}
+		video {
+		    max-width: 100%;
+		    height: auto;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1>Responsive Web Design</h1>
+	</div>
+	<div class="row">
+		<div class="col-3 col-m-6">
+			<picture>
+				<source srcset="poke-ball-2.png" media="(min-width: 769px)">
+				<source srcset="poke-ball.png">
+				<img class="image" src="poke-ball.png">
+			</picture>
+		</div>
+		<div class="col-3 col-m-6">
+			<video width="100%" controls>
+				<source src="mov_bbb.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div class="col-6 col-m-12 background-img">
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+		</div>	
+	</div>
+</body>
+</html>
