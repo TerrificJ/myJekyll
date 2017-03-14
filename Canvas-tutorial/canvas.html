@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas Tutorial</title>
+</head>
+<body>
+	<canvas id="myCanvas1" width="200" height="100" style="border:1px solid #000000"></canvas>
+	<canvas id="myCanvas2" width="200" height="100" style="border:1px solid #000000"></canvas>
+	<canvas id="myCanvas3" width="200" height="100" style="border:1px solid #000000"></canvas>
+	<canvas id="myCanvas4" width="200" height="100" style="border:1px solid #000000"></canvas>
+	<canvas id="myCanvas5" width="200" height="100" style="border:1px solid #000000"></canvas>
+	<canvas id="myCanvas6" width="200" height="100" style="border:1px solid #000000"></canvas>
+	<br><canvas id="myCanvas7" width="532" height="532" style="border:1px solid #000000"></canvas>
+	<canvas id="myCanvas8" width="400" height="400" style="background-color:#333"></canvas>
+	<img id="poke-ball-2" src="poke-ball-2.png" width="512" height="512" alt="Master Ball" hidden>
+	<script type="text/javascript">
+		var canvas1 = document.getElementById('myCanvas1');
+		var ctx1 = canvas1.getContext("2d");
+		ctx1.fillStyle="#FF0000";
+		ctx1.fillRect(0,0,150,75);
+		ctx1.moveTo(0,0);
+		ctx1.lineTo(200,100);
+		ctx1.stroke();
+		ctx1.beginPath();
+		ctx1.arc(95,50,40,0,2*Math.PI);
+		ctx1.stroke();
+
+		var canvas2 = document.getElementById('myCanvas2');
+		var ctx2 = canvas2.getContext("2d");
+		var grd2 = ctx2.createLinearGradient(0,0,200,0);
+		grd2.addColorStop(0,"red");
+		grd2.addColorStop(1,"white");
+		ctx2.fillStyle = grd2;
+		ctx2.fillRect(10,10,150,80);
+
+		var canvas3 = document.getElementById('myCanvas3');
+		var ctx3 = canvas3.getContext("2d");
+		var grd3 = ctx3.createRadialGradient(75,50,5,90,60,100);
+		grd3.addColorStop(0,"red");
+		grd3.addColorStop(1,"white");
+		ctx3.fillStyle = grd3;
+		ctx3.fillRect(10,10,150,80);
+
+		var canvas4 = document.getElementById('myCanvas4');
+		var ctx4 = canvas4.getContext("2d");
+		ctx4.font = "30px Arial";
+		ctx4.fillText("Hello world", 10, 50);
+
+		var canvas5 = document.getElementById('myCanvas5');
+		var ctx5 = canvas5.getContext("2d");
+		ctx5.font = "30px Arial";
+		ctx5.strokeText("Hello world", 10, 50);
+
+		var canvas6 = document.getElementById('myCanvas6');
+		var ctx6 = canvas6.getContext("2d");
+		ctx6.font = "30px Comic Sans MS";
+		ctx6.fillStyle = "red";
+		ctx6.textAlign = "center";
+		ctx6.fillText("Hello World", canvas6.width/2, canvas6.height/2);
+
+		window.onload = function(){
+			var canvas7 = document.getElementById('myCanvas7');
+			var ctx7 = canvas7.getContext("2d");
+			var img = document.getElementById('poke-ball-2');
+			ctx7.drawImage(img, 10, 10);
+		}
+
+		var canvas8 = document.getElementById('myCanvas8');
+		var ctx8 = canvas8.getContext("2d");
+		var radius = canvas8.height/2;
+		ctx8.translate(radius, radius);
+		radius = radius * 0.9;
+		setInterval(drawClock, 1000);
+		//drawClock();
+
+		function drawClock(){
+			drawFace(ctx8, radius);
+			drawNumbers(ctx8, radius);
+			drawTime(ctx8, radius);
+		}
+
+		function drawFace(ctx, radius){
+			var grad;
+			ctx.beginPath();
+			ctx.arc(0, 0, radius, 0, 2*Math.PI);
+			ctx.fillStyle = "white";
+			ctx.fill();
+			grad = ctx.createRadialGradient(0, 0, radius*0.95, 0, 0, radius*1.05);
+			grad.addColorStop(0, '#333');
+			grad.addColorStop(0.5, 'white');
+			grad.addColorStop(1, '#333');
+			ctx.strokeStyle = grad;
+			ctx.lineWidth = radius*0.1;
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+			ctx.fillStyle = "#333";
+			ctx.fill();
+		}
+
+		function drawNumbers(ctx,radius){
+			var ang;
+			var num;
+			ctx.font = radius*0.15 + "px arial";
+			ctx.textBaseline = "middle";
+			ctx.textAlign = "center";
+			for(num = 1; num < 13; num++){
+				ang = num * Math.PI / 6;
+				ctx.rotate(ang);
+				ctx.translate(0, -radius*0.85);
+				ctx.rotate(-ang);
+				ctx.fillText(num.toString(), 0, 0);
+				ctx.rotate(ang);
+				ctx.translate(0, radius*0.85);
+				ctx.rotate(-ang);
+			}
+		}
+
+		function drawTime(ctx, radius){
+			var now = new Date();
+			var hour = now.getHours();
+			var minute = now.getMinutes();
+			var second = now.getSeconds();
+			//hour
+			hour = hour%12;
+			hour = (hour*Math.PI/6) + (minute*Math.PI/(6*60)) + (second*Math.PI/(360*60));
+			drawHand(ctx, hour, radius*0.5, radius*0.07);
+			//minute
+			minute = (minute*Math.PI/30) + (second*Math.PI/(30*60));
+			drawHand(ctx, minute, radius*0.8, radius*0.07);
+			//second
+			second = (second*Math.PI/30);
+			drawHand(ctx, second, radius*0.9, radius*0.02);
+		}
+
+		function drawHand(ctx, pos, length, width){
+			ctx.beginPath();
+			ctx.lineWidth = width;
+			ctx.lineCap = "round";
+			ctx.moveTo(0,0);
+			ctx.rotate(pos);
+			ctx.lineTo(0, -length);
+			ctx.stroke();
+			ctx.rotate(-pos);
+		}
+
+	</script>
+</body>
+</html>
